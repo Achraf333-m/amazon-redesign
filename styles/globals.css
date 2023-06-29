@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .onHover {
+    @apply hover:underline cursor-pointer hover:text-[#4462fb]
+  }
+  .hideit .thumbs-wrapper {
+    @apply !hidden
+  }
+}
+
