@@ -14,7 +14,7 @@ function Header() {
 
   return (
     <div className="bg-[#000000] text-white">
-      <header className="flex justify-around max-w-6xl mx-auto items-center p-4 text-base font-semibold cursor-default ">
+      <header className="flex justify-around max-w-screen-2xl mx-auto items-center p-4 text-base font-semibold cursor-default ">
         {barShown ? (
           <>
             <div className="flex flex-col sm:flex-row space-x-4 items-center">

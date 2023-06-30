@@ -9,5 +9,8 @@
   .hideit .thumbs-wrapper {
     @apply !hidden
   }
+  .hideit .control-dots {
+    @apply !hidden
+  }
 }
 
