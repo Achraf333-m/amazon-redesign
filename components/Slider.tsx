@@ -9,18 +9,14 @@ export default class NextJsCarousel extends Component {
         return (
             <div>
               <Carousel className='hideit'>
-                  <div>
-                      <img src="https://m.media-amazon.com/images/I/615Zwk+OB7L._SX3000_.jpg"/>
+                  <div className=''>
+                      <img  src="https://m.media-amazon.com/images/I/615Zwk+OB7L._SX3000_.jpg"/>
   
                   </div>
                   <div>
-                      <img src="https://m.media-amazon.com/images/I/71upF3u7n-L._SX3000_.jpg" />
-  
+                      <img  src="https://m.media-amazon.com/images/I/71upF3u7n-L._SX3000_.jpg" />
                   </div>
-                  <div>
-                      <img src="https://m.media-amazon.com/images/I/814vuMu5eLL._SX3000_.jpg"/>
-  
-                  </div>
+                  
               </Carousel>
             </div>
         );

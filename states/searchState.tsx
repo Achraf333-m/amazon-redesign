@@ -7,5 +7,5 @@ export const bookState = atom({
 
 export const makeUpState = atom({
     key: 'makeUpState',
-    default: 'blush'
+    default: 'foundation'
   });
