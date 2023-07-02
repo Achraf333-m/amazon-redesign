@@ -1,9 +1,12 @@
+
+import useAuth from "@/cHooks/useAuth";
 import Header from "@/components/Header";
 import Products from "@/components/Products";
 import Slider from "@/components/Slider";
 import { makeUpState } from "@/states/searchState";
 import { Prod } from "@/types";
 import { productLinks } from "@/utils/ProductLinks";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 
@@ -14,24 +17,23 @@ interface props {
 }
 
 export default function Home({ makeUpProducts, booksProduct }: props) {
-  const [search, setSearch] = useRecoilState(makeUpState);
   const [products, setProducts] = useState<Prod[] | undefined>();
+  const [search, setSearch] = useRecoilState(makeUpState);
   const [books, setBooks] = useState<Prod[] | undefined>();
+  const { user, loading }= useAuth()
+ 
+  // if(loading || !user) return null;
+
+  // const getBooks = async () => {
+  //   const url = fetch(productLinks.booksProduct);
+  //   const promise = await url;
+  //   const data = await promise.json();
+  //   setBooks(data);
+  // };
+
+
 
   
-
-  const getBooks = async () => {
-    const url = fetch(productLinks.booksProduct);
-    const promise = await url;
-    const data = await promise.json();
-    setBooks(data);
-  };
-
-  useEffect(() => {
-    getBooks();
-  }, []);
-
-  console.log(books);
 
   const getProducts = async () => {
     
@@ -51,11 +53,16 @@ export default function Home({ makeUpProducts, booksProduct }: props) {
         };
       })
     );
+
+
   };
 
   useEffect(() => {
-    getProducts();
+
+     getProducts();
+
   }, [search]);
+  
 
   return (
     <>

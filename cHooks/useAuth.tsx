@@ -1,5 +1,4 @@
 import { auth } from "@/firebase";
-import { error } from "console";
 import {
   User,
   createUserWithEmailAndPassword,
@@ -15,7 +14,7 @@ interface props {
 }
 
 interface FbAuth {
-    user: User | null | undefined,
+    user: User | null ,
     signIn: (email:string, password:string) => Promise<void>,
     signUp: (email:string, password:string) => Promise<void>,
     logOut: () => Promise<void>,
@@ -33,13 +32,13 @@ const AuthContext = createContext<FbAuth>({
 })
 
 export const AuthProvider = ({children}:props) => {
-  const [user, setUser] = useState<User | null>();
+  const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   const router = useRouter();
 
-  useEffect(() => {
+  useEffect(() => { 
     onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(user);
@@ -84,16 +83,16 @@ export const AuthProvider = ({children}:props) => {
       .finally(() => setLoading(false));
   };
 
-  const memoed = useMemo(
+  const memo = useMemo(
     () => (
       { user, loading, error, signIn, logOut, signUp }
       ),
       [loading, user, error]
   );
 
-  return <AuthContext.Provider value={memoed}>{children}</AuthContext.Provider>
+  return <AuthContext.Provider value={memo}>{children}</AuthContext.Provider>
 };
 
 export default function useAuth() {
-    useContext(AuthContext)
+    return useContext(AuthContext)
 }
