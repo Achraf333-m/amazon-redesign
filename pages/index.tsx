@@ -1,4 +1,3 @@
-
 import useAuth from "@/cHooks/useAuth";
 import Header from "@/components/Header";
 import Products from "@/components/Products";
@@ -9,6 +8,8 @@ import { productLinks } from "@/utils/ProductLinks";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
+import Login from "./login";
+import Modal from "@/components/Modal";
 
 interface props {
   makeUpProducts: string;
@@ -20,24 +21,16 @@ export default function Home({ makeUpProducts, booksProduct }: props) {
   const [products, setProducts] = useState<Prod[] | undefined>();
   const [search, setSearch] = useRecoilState(makeUpState);
   const [books, setBooks] = useState<Prod[] | undefined>();
-  const { user, loading }= useAuth()
- 
-  // if(loading || !user) return null;
+  const { user, loading } = useAuth();
 
-  // const getBooks = async () => {
-  //   const url = fetch(productLinks.booksProduct);
-  //   const promise = await url;
-  //   const data = await promise.json();
-  //   setBooks(data);
-  // };
-
-
-
-  
+  // if (!user) {
+  //   return <Login />;
+  // }
 
   const getProducts = async () => {
-    
-    const url = fetch(`http://makeup-api.herokuapp.com/api/v1/products.json?product_type=${search}`);
+    const url = fetch(
+      `http://makeup-api.herokuapp.com/api/v1/products.json?product_type=${search}`
+    );
     const promise = await url;
     const data = await promise.json();
     setProducts(
@@ -53,16 +46,11 @@ export default function Home({ makeUpProducts, booksProduct }: props) {
         };
       })
     );
-
-
   };
 
   useEffect(() => {
-
-     getProducts();
-
+    getProducts();
   }, [search]);
-  
 
   return (
     <>
@@ -83,6 +71,7 @@ export default function Home({ makeUpProducts, booksProduct }: props) {
           <Products products={products} />
         </div>
       </main>
+      <Modal/>
     </>
   );
 }

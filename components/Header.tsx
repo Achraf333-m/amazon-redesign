@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import Search from "./Search";
 import { BsCartDash } from "react-icons/bs";
 import { ImAmazon } from "react-icons/im";
+import { useRouter } from "next/router";
 
 function Header() {
   const [barShown, setBarShown] = useState(false);
+  const router = useRouter()
 
   useEffect(() => {
     setTimeout(() => {
@@ -33,7 +35,7 @@ function Header() {
             <div className="flex space-x-4 ">
               <p className="onHover">Account</p>
               <p className="onHover">Orders</p>
-              <BsCartDash className="h-6 w-6 onHover hover:scale-110" />
+              <BsCartDash className="h-6 w-6 onHover hover:scale-110" onClick={() => router.push('/cart')} />
             </div>
           </>
         ) : (
